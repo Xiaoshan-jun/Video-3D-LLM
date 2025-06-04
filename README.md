@@ -1,5 +1,6 @@
 # Video-3D LLM: Learning Position-Aware Video Representation for 3D Scene Understanding
 
+
 <div align="center" margin-bottom="3em">
     <a href="https://arxiv.org/abs/2412.00493" target="_blank">
     <img src="https://img.shields.io/badge/Video--3D_LLM-ArXiv-red" alt="Paper arXiv"></a>
@@ -23,14 +24,27 @@ The Chinese University of Hong Kong<br>
 <sup>&ddagger;</sup> Corresponding author.</p>
 </div>
 
+---
+## 🚀 Announcing Our Latest Work!
+
+We are excited to introduce our newest research: **Learning from Videos for 3D World: Enhancing MLLMs with 3D Vision Geometry Priors**.
+
+This research delves into how explicitly incorporating 3D vision geometry priors can significantly advance the capabilities of Multimodal Large Language Models (MLLMs) in understanding the 3D world through video inputs. We believe this approach marks a significant step forward in creating more spatially aware and robust AI systems.
+
+➡️ **Discover more about this exciting new project here: [Website](https://github.com/LaVi-Lab/VG-LLM) [Arxiv](https://arxiv.org/abs/2505.24625)**
+
+This work complements and builds upon our research in creating powerful 3D-aware models. Below, you'll find the details for our related project, **Video-3D LLM**:
+
+---
+
+## Architecture
+
+
+We propose a novel generalist model, i.e., Video-3D LLM, for 3D scene understanding. By treating 3D scenes as dynamic videos and incorporating 3D position encoding into these representations, our Video-3D LLM aligns video representations with real-world spatial contexts more accurately.
 
 <p align="center">
     <img src="assets/video3dllm.png" width="95%"><br>
 </p>
-&nbsp;
-
-The rapid advancement of Multimodal Large Language Models (MLLMs) has significantly impacted various multimodal tasks. However, these models face challenges in tasks that require spatial understanding within 3D environments. Efforts to enhance MLLMs, such as incorporating point cloud features, have been made, yet a considerable gap remains between the models' learned representations and the inherent complexity of 3D scenes. This discrepancy largely stems from the training of MLLMs on predominantly 2D data, which restricts their effectiveness in comprehending 3D spaces. 
-To address this issue, in this paper, we propose a novel generalist model, i.e., Video-3D LLM, for 3D scene understanding. By treating 3D scenes as dynamic videos and incorporating 3D position encoding into these representations, our Video-3D LLM aligns video representations with real-world spatial contexts more accurately. Additionally, we have implemented a maximum coverage sampling technique to optimize the balance between computational costs and performance efficiency. Extensive experiments demonstrate that our model achieves state-of-the-art performance on several 3D scene understanding benchmarks, including ScanRefer, Multi3DRefer, Scan2Cap, ScanQA, and SQA3D.
 
 ## News
 - [2025-3-4] We release the checkpoint of [Video-3D LLM](https://huggingface.co/zd11024/Video3D-LLM-LLaVA-Qwen-Uniform-32).
