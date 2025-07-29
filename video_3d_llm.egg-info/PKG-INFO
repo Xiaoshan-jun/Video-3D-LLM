@@ -1,0 +1,179 @@
+Metadata-Version: 2.4
+Name: video-3d-llm
+Version: 1.0.0
+Summary: Video-3D LLM: Learning Position-Aware Video Representation for 3D Scene Understanding
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: standalone
+Requires-Dist: shortuuid; extra == "standalone"
+Requires-Dist: httpx==0.24.0; extra == "standalone"
+Requires-Dist: einops; extra == "standalone"
+Requires-Dist: ftfy; extra == "standalone"
+Provides-Extra: train
+Requires-Dist: llava[standalone]; extra == "train"
+Requires-Dist: numpy==1.26.1; extra == "train"
+Requires-Dist: open_clip_torch; extra == "train"
+Requires-Dist: fastapi; extra == "train"
+Requires-Dist: markdown2[all]; extra == "train"
+Requires-Dist: numpy; extra == "train"
+Requires-Dist: requests; extra == "train"
+Requires-Dist: sentencepiece; extra == "train"
+Requires-Dist: torch==2.1.2; extra == "train"
+Requires-Dist: torchvision==0.16.2; extra == "train"
+Requires-Dist: uvicorn; extra == "train"
+Requires-Dist: wandb; extra == "train"
+Requires-Dist: deepspeed==0.14.4; extra == "train"
+Requires-Dist: peft==0.4.0; extra == "train"
+Requires-Dist: accelerate==0.33.0; extra == "train"
+Requires-Dist: tokenizers~=0.15.2; extra == "train"
+Requires-Dist: transformers@ git+https://github.com/huggingface/transformers.git@1c39974a4c4036fd641bc1191cc32799f85715a4 ; extra == "train"
+Requires-Dist: bitsandbytes==0.41.0; extra == "train"
+Requires-Dist: scikit-learn==1.2.2; extra == "train"
+Requires-Dist: sentencepiece~=0.1.99; extra == "train"
+Requires-Dist: einops==0.6.1; extra == "train"
+Requires-Dist: einops-exts==0.0.4; extra == "train"
+Requires-Dist: gradio_client==0.2.9; extra == "train"
+Requires-Dist: urllib3<=2.0.0; extra == "train"
+Requires-Dist: datasets==2.16.1; extra == "train"
+Requires-Dist: pydantic==1.10.8; extra == "train"
+Requires-Dist: timm; extra == "train"
+Requires-Dist: hf_transfer; extra == "train"
+Requires-Dist: opencv-python; extra == "train"
+Requires-Dist: av; extra == "train"
+Requires-Dist: decord; extra == "train"
+Requires-Dist: tyro; extra == "train"
+Requires-Dist: scipy; extra == "train"
+Requires-Dist: imageio; extra == "train"
+Requires-Dist: ray; extra == "train"
+Requires-Dist: shortuuid; extra == "train"
+Requires-Dist: fasteners; extra == "train"
+Dynamic: license-file
+
+# Video-3D LLM: Learning Position-Aware Video Representation for 3D Scene Understanding
+
+
+<div align="center" margin-bottom="3em">
+    <a href="https://arxiv.org/abs/2412.00493" target="_blank">
+    <img src="https://img.shields.io/badge/Video--3D_LLM-ArXiv-red" alt="Paper arXiv"></a>
+    <a href="https://huggingface.co/datasets/zd11024/Video-3D-LLM_data" target="_blank">
+    <img src="https://img.shields.io/badge/Video--3D_LLM-data-blue" alt="Paper arXiv"></a>
+    <a href="https://huggingface.co/zd11024/Video3D-LLM-LLaVA-Qwen-Uniform-32" target="_blank">
+    <img src="https://img.shields.io/badge/Video--3D_LLM-model-orange" alt="Paper arXiv"></a>
+</div>
+
+<div align="center" margin-bottom="3em">
+<a target="_blank" href="https://github.com/zd11024">Duo Zheng<sup>*</sup></a>,
+<a target="_blank" href="https://sega-hsj.github.io/">Shijia Huang<sup>*</sup></a> and
+<a target="_blank" href="https://lwwangcse.github.io/">Liwei Wang<sup>&ddagger;</sup></a>
+
+<br>
+<strong>
+The Chinese University of Hong Kong<br>
+</strong>
+<br>
+<p style="font-size: 12px;"><sup>*</sup>Equal contribution.
+<sup>&ddagger;</sup> Corresponding author.</p>
+</div>
+
+---
+## 🚀 Announcing Our Latest Work!
+
+We are excited to introduce our newest research: **Learning from Videos for 3D World: Enhancing MLLMs with 3D Vision Geometry Priors**.
+
+This research delves into how explicitly incorporating 3D vision geometry priors can significantly advance the capabilities of Multimodal Large Language Models (MLLMs) in understanding the 3D world through video inputs. We believe this approach marks a significant step forward in creating more spatially aware and robust AI systems.
+
+➡️ **Discover more about this exciting new project here: [Website](https://github.com/LaVi-Lab/VG-LLM) [Arxiv](https://arxiv.org/abs/2505.24625)**
+
+This work complements and builds upon our research in creating powerful 3D-aware models. Below, you'll find the details for our related project, **Video-3D LLM**:
+
+---
+
+## Architecture
+
+
+We propose a novel generalist model, i.e., Video-3D LLM, for 3D scene understanding. By treating 3D scenes as dynamic videos and incorporating 3D position encoding into these representations, our Video-3D LLM aligns video representations with real-world spatial contexts more accurately.
+
+<p align="center">
+    <img src="assets/video3dllm.png" width="95%"><br>
+</p>
+
+## News
+- [2025-3-4] We release the checkpoint of [Video-3D LLM](https://huggingface.co/zd11024/Video3D-LLM-LLaVA-Qwen-Uniform-32).
+- [2025-2-27] Our paper is accepted to CVPR 2025.
+- [2024-12-11] We release the processed data of [Video-3D LLM](https://huggingface.co/datasets/zd11024/Video-3D-LLM_data).
+- [2024-12-3] We release the paper of [Video-3D LLM](https://arxiv.org/abs/2412.00493).
+
+## TODO List
+
+- \[x\] Release the training code.
+- \[x\] Release the evaluation script.
+- \[x\] Release the processed data.
+- \[x\] Release the model checkpoint.
+
+## Installation
+1. Clone this repository and navigate to the Video-3D-LLM:
+```bash
+git clone https://github.com/LaVi-Lab/Video-3D-LLM.git
+cd Video-3D-LLM
+```
+
+2. Create the conda environment:
+```bash
+conda create -n video3dllm python=3.10 -y
+conda activate video3dllm
+pip install --upgrade pip  # Enable PEP 660 support.
+pip install -e ".[train]"
+pip install flash-attn --no-build-isolation     # install flash attention
+```
+
+## Data Preparation
+For data preparation, please refer to this [instruction](scripts/3d/preprocessing/README.md) for detail.
+
+## Training & Inference
+### Full-finetuned Training
+Our model is **fully fine-tuned** using a combination dataset from five tasks, including ScanRefer, Multi3DRefer, SQA3D, ScanQA, Scan2Cap.
+The option `frame_sampling_strategy` in `train_multi.sh` should be set to one of the following options: `['uniform', 'mc-ratio90', 'mc-ratio95']`, and the option `frames_upbound` determines the maximum number of frames used during training phase.
+```bash
+sh scripts/3d/train/train_multi.sh
+```
+
+### Evaluation
+Evaluate model performance with specified checkpoint and frame sampling strategy.
+```bash
+# Usage: sh scripts/3d/eval/eval_scan2cap.sh <CKPT_NAME> <SAMPLING_STRATEGY> <MAX_FRAMES>
+# Parameters:
+#   CKPT_NAME:           Path to model checkpoint for evaluation
+#   SAMPLING_STRATEGY:   Frame sampling strategy (options: uniform, ratio90, ratio95)
+#     - uniform:         Uniform frame sampling (equally spaced frames)
+#     - ratio90:         Adaptive sampling until covering 90% of scene voxels
+#     - ratio95:         Adaptive sampling until covering 95% of scene voxels
+#   MAX_FRAMES:          Maximum number of frames to use (upper sampling limit)
+# Note: Sampling strategies work consistently across tasks. For example:
+#   sh scripts/3d/eval/eval_scan2cap.sh $CKPT uniform 32
+sh scripts/3d/eval/eval_scan2cap.sh $CKPT_NAME $SAMPLING_STRATEGY $MAX_FRAMES   
+```
+
+
+## Acknowledgements
+We would like to thank the following works for their contributions to the opensourced codebase and community!
+* [LLaVA-Next](https://github.com/LLaVA-VL/LLaVA-NeXT/tree/main): the codebase our codebase is built upon.
+* [LLaVA-3D](https://github.com/ZCMax/LLaVA-3D), [LEO](https://github.com/embodied-generalist/embodied-generalist), [EmbodiedScan](https://github.com/OpenRobotLab/EmbodiedScan): We refer to these works for the data processing and evaluation setup.
+* [ScanNet](https://github.com/ScanNet/ScanNet), [ScanRefer](https://github.com/daveredrum/ScanRefer), [Multi3DRefer](https://github.com/3dlg-hcvc/M3DRef-CLIP), [SQA3D](https://github.com/SilongYong/SQA3D), [ScanQA](https://github.com/ATR-DBI/ScanQA): the datasets we use.
+
+
+## Citation
+If you find our **Video-3D LLM** useful for your research, please consider giving this repository a star and citing our paper as follows:
+```
+@misc{zheng2024video3dllmlearningpositionaware,
+      title={Video-3D LLM: Learning Position-Aware Video Representation for 3D Scene Understanding}, 
+      author={Duo Zheng and Shijia Huang and Liwei Wang},
+      year={2024},
+      eprint={2412.00493},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2412.00493}, 
+}
+```

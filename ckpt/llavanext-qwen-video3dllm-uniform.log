@@ -1,0 +1,59 @@
+[2025-07-28 19:45:22,259] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[93m [WARNING] [0m async_io requires the dev libaio .so object and headers but these were not found.
+[93m [WARNING] [0m async_io: please install the libaio-dev package with apt
+[93m [WARNING] [0m If libaio is already installed (perhaps from source), try setting the CFLAGS and LDFLAGS environment variables to where it can be found.
+[93m [WARNING] [0m Please specify the CUTLASS repo directory as environment variable $CUTLASS_PATH
+[93m [WARNING] [0m sparse_attn requires a torch version >= 1.5 and < 2.0 but detected 2.1
+[93m [WARNING] [0m using untested triton version (2.1.0), only 1.0.0 is known to be compatible
+/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/huggingface_hub/file_download.py:945: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+[2025-07-28 19:45:24,023] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-07-28 19:45:24,023] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/huggingface_hub/file_download.py:945: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Rank 0:  Overwriting config with {'use_pos_skipping': False, 'pos_skipping_range': 4096, 'mm_spatial_pool_mode': 'bilinear', 'object_feature_type': 'patch14-pe', 'world_position_embedding_type': 'avg-discrete-sin3d', 'voxel_size': 0.1, 'min_xyz_range': [-15, -15, -5], 'max_xyz_range': [15, 15, 5], 'ground_head_type': 'infonce', 'ground_head_hidden_size': 512, 'ground_loss_scale': 1, 'ground_head_temperature': 0.07}
+Downloading shards:   0%|          | 0/4 [00:00<?, ?it/s]Downloading shards:  25%|██▌       | 1/4 [00:30<01:31, 30.34s/it]Downloading shards:  50%|█████     | 2/4 [01:00<01:00, 30.15s/it]Downloading shards:  75%|███████▌  | 3/4 [01:29<00:29, 29.83s/it]Downloading shards: 100%|██████████| 4/4 [01:57<00:00, 28.83s/it]Downloading shards: 100%|██████████| 4/4 [01:57<00:00, 29.27s/it]
+Traceback (most recent call last):
+  File "/media/jxiang9143/AIDataset/github/Video-3D-LLM/llava/train/train_3d.py", line 1892, in <module>
+    train()
+  File "/media/jxiang9143/AIDataset/github/Video-3D-LLM/llava/train/train_3d.py", line 1613, in train
+    model = get_model(model_args, training_args, bnb_model_from_pretrained_args)
+  File "/media/jxiang9143/AIDataset/github/Video-3D-LLM/llava/train/train_3d.py", line 1541, in get_model
+    model = LlavaQwenForCausalLM.from_pretrained(
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 3398, in from_pretrained
+    config = cls._autoset_attn_implementation(
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1377, in _autoset_attn_implementation
+    cls._check_and_enable_flash_attn_2(
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1469, in _check_and_enable_flash_attn_2
+    raise ImportError(f"{preface} the package flash_attn seems to be not installed. {install_message}")
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2.
+[2025-07-28 19:47:26,021] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 1) local_rank: 0 (pid: 10640) of binary: /home/jxiang9143/anaconda3/envs/video3dllm/bin/python3.10
+Traceback (most recent call last):
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/torch/distributed/run.py", line 806, in main
+    run(args)
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/torch/distributed/run.py", line 797, in run
+    elastic_launch(
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 134, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/jxiang9143/anaconda3/envs/video3dllm/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+llava/train/train_3d.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-07-28_19:47:26
+  host      : ENG-AE-E058608
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 10640)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

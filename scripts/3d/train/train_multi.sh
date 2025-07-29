@@ -23,15 +23,17 @@ VISION_MODEL_VERSION_CLEAN="${VISION_MODEL_VERSION//\//_}"
 PROMPT_VERSION="qwen_1_5"
 MID_RUN_NAME="llavanext-qwen-video3dllm-uniform"
 PREV_STAGE_CHECKPOINT="data/models/LLaVA-Video-7B-Qwen2"
+#PREV_STAGE_CHECKPOINT="Qwen/Qwen2-7B-Instruct"
 echo "PREV_STAGE_CHECKPOINT: ${PREV_STAGE_CHECKPOINT}"
 echo "MID_RUN_NAME: ${MID_RUN_NAME}"
 
+mkdir -p "./ckpt/$MID_RUN_NAME"
 
-NUM_GPUS=8
-BATCH_SIZE=16
+NUM_GPUS=1
+BATCH_SIZE=1
 GRADIENT_ACCUMULATION_STEPS=$((BATCH_SIZE/NUM_GPUS))
 
-export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export CUDA_VISIBLE_DEVICES=0
 torchrun --nnodes=1 --nproc_per_node="${NUM_GPUS}" --master_port 43000 \
     llava/train/train_3d.py \
     --deepspeed scripts/zero3.json \
