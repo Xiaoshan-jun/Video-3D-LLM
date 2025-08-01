@@ -447,7 +447,50 @@ class Qwen2VLGRPOVLLMTrainerModified(Trainer):
                             del sub_entry[k]
         return data
 
+    def compute_rewards(self, completions, inputs):
+        """
+        Generic reward computation logic that supports various 3D multimodal tasks.
+        - completions: List[List[{"role": ..., "content": ...}]]
+        - inputs: List of training examples with keys like 'solution', 'problem_type', etc.
+        """
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+        # Extract ground-truth answers and problem types
+        solutions = [x["solution"] for x in inputs]
+        problem_types = [x["problem_type"] for x in inputs]
+
+        rewards_per_func = torch.zeros(
+            len(completions), len(self.reward_funcs), device=device
+        )
+
+        for i, reward_func in enumerate(self.reward_funcs):
+            reward_kwargs = {
+                key: []
+                for key in inputs[0].keys()
+                if key not in ["prompt", "completion"]
+            }
+            for key in reward_kwargs:
+                for ex in inputs:
+                    reward_kwargs[key].extend([ex[key]] * self.num_generations)
+
+            if reward_func.__name__ == "accuracy_reward":
+                output = reward_func(
+                    prompts=None,
+                    completions=completions,
+                    solution=solutions,
+                    problem_type=problem_types[0],  # assumes uniform problem_type per batch
+                    **reward_kwargs
+                )
+            else:
+                output = reward_func(
+                    prompts=None,
+                    completions=completions,
+                    solution=solutions,
+                    **reward_kwargs
+                )
+            rewards_per_func[:, i] = torch.tensor(output, dtype=torch.float32, device=device)
+
+        return rewards_per_func
 
     def compute_loss(
         self, model, inputs, return_outputs=False, num_items_in_batch=None
@@ -739,40 +782,10 @@ class Qwen2VLGRPOVLLMTrainerModified(Trainer):
             ]
 
         # Compute the rewards
-        prompts = [prompt for prompt in prompts for _ in range(self.num_generations)]
-        rewards_per_func = torch.zeros(
-            len(prompts), len(self.reward_funcs), device=device
-        )
-        for i, (reward_func, reward_processing_class) in enumerate(
-            zip(self.reward_funcs, self.reward_processing_classes)
-        ):
-            reward_kwargs = {
-                key: []
-                for key in inputs[0].keys()
-                if key not in ["prompt", "completion"]
-            }
-            for key in reward_kwargs:
-                for example in inputs:
-                    # Repeat each value in the column for `num_generations` times
-                    reward_kwargs[key].extend([example[key]] * self.num_generations)
-            output_reward_func = reward_func(
-                prompts=prompts, completions=completions, **reward_kwargs
-            )
-            rewards_per_func[:, i] = torch.tensor(
-                output_reward_func, dtype=torch.float32, device=device
-            )
+        rewards_per_func = self.compute_rewards(completions, inputs)
             
             
-        # rewards_per_func = gather(rewards_per_func)
-        # # Sum the rewards from all reward functions
-        # rewards = rewards_per_func.sum(dim=1)
-        
-        # process_slice = slice(
-        #     self.accelerator.process_index * len(prompts),
-        #     (self.accelerator.process_index + 1) * len(prompts),
-        # )
-        
-        # rewards = rewards[process_slice]
+
         
         
         
